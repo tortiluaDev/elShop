@@ -1,0 +1,9 @@
+.filters {
+	@apply flex justify-between mb-8 mt-10;
+	> button {
+		@apply border-b border-b-gray transition-colors px-16 pb-2;
+	}
+	> .active {
+		@apply border-b text-primary border-b-primary transition-colors px-16 pb-2;
+	}
+}

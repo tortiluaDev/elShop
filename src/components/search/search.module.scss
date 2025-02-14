@@ -1,0 +1,24 @@
+.searchInput {
+	@apply flex mb-1 w-full bg-transparent border border-gray items-center justify-between;
+
+	input {
+		@apply w-full bg-transparent pl-4 pr-4 py-4 outline-none border-r border-gray;
+	}
+
+	// Контейнер для иконок
+	> div {
+		@apply flex items-center gap-2 ml-4 mr-4;
+	}
+}
+
+.dropdown {
+	@apply absolute top-full left-0 w-full bg-white border rounded shadow-lg mt-2 p-4 z-50;
+
+	> ul {
+		@apply text-lg;
+
+		> li {
+			@apply flex items-center justify-between p-1 hover:bg-primary hover:text-white transition-colors duration-[40ms] cursor-pointer;
+		}
+	}
+}
