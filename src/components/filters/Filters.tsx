@@ -12,6 +12,12 @@ export function Filters() {
 	const searchParams = new URLSearchParams()
 	const router = useRouter()
 
+	const onClickHandler = (category: string) => {
+		setCategory(category)
+		searchParams.set('category', category)
+		router.push(`?${searchParams}`)
+	}
+
 	return (
 		<div className={styles.filters}>
 			<Button
@@ -25,31 +31,19 @@ export function Filters() {
 			</Button>
 			<Button
 				className={category === 'iphones' ? styles.active : ''}
-				onClick={() => {
-					setCategory('iphones')
-					searchParams.set('category', 'iphones')
-					router.push(`?${searchParams}`)
-				}}
+				onClick={() => onClickHandler('iphones')}
 			>
 				Телефоны
 			</Button>
 			<Button
 				className={category === 'GPUs' ? styles.active : ''}
-				onClick={() => {
-					setCategory('GPUs')
-					searchParams.set('category', 'GPUs')
-					router.push(`?${searchParams}`)
-				}}
+				onClick={() => onClickHandler('GPUs')}
 			>
 				Видеокарты
 			</Button>
 			<Button
 				className={category === 'consoles' ? styles.active : ''}
-				onClick={() => {
-					setCategory('consoles')
-					searchParams.set('category', 'consoles')
-					router.push(`?${searchParams}`)
-				}}
+				onClick={() => onClickHandler('consoles')}
 			>
 				Консоли
 			</Button>

@@ -40,7 +40,12 @@ export function SearchDropdown({
 						}}
 					>
 						{query}
-						<button onClick={() => handleDeleteQuery(id)}>
+						<button
+							onClick={e => {
+								e.stopPropagation()
+								handleDeleteQuery(id)
+							}}
+						>
 							<X />
 						</button>
 					</li>

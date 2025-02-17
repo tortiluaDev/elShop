@@ -3,61 +3,38 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 
-import { Card } from './Card'
+import { CardContainer } from './CardContainer'
 import { catalogService } from '@/services/catalog.service'
+import { IProductExt } from '@/types/products.types'
 
 export function Cards() {
-	const { data, isLoading, isError } = useQuery({
-		queryKey: ['products'],
-		queryFn: () => catalogService.getAll()
-	})
-
 	const searchParams = useSearchParams()
 	const searchName = searchParams.get('name')
-	const searchCategory = searchParams.get('category')
+	const searchCategory = searchParams.get('category') as 'iphones' | 'GPUs' | 'consoles' | null
 
+	const { data, isLoading, isError } = useQuery({
+		queryKey: ['products'],
+		queryFn: async () => await catalogService.getAll()
+	})
+
+	const filterProducts = (product: IProductExt) => {
+		if (!searchName && !searchCategory) return true
+		if (searchName && product.name.toLowerCase().includes(searchName.toLowerCase())) return true
+
+		const categoryMap = { iphones: '10', GPUs: '11', consoles: '12' }
+		return searchCategory && product.id.startsWith(categoryMap[searchCategory])
+	}
+
+	if (isLoading) return <p>Данные загружаются</p>
+	if (isError) return <p>Ошибка загрузки данных</p>
 	return (
 		<div className='flex flex-wrap basis-1/5 items-center justify-between gap-8 columns-4'>
-			{data?.data.map(product => {
-				if (!searchName && !searchCategory)
-					return (
-						<Card
-							key={product.id}
-							{...product}
-						/>
-					)
-				else if (searchName && product.name.toLowerCase().includes(searchName.toLowerCase())) {
-					return (
-						<Card
-							key={product.id}
-							{...product}
-						/>
-					)
-				} else if (searchCategory) {
-					if (searchCategory === 'iphones' && product.id.startsWith('10')) {
-						return (
-							<Card
-								key={product.id}
-								{...product}
-							/>
-						)
-					} else if (searchCategory === 'GPUs' && product.id.startsWith('11')) {
-						return (
-							<Card
-								key={product.id}
-								{...product}
-							/>
-						)
-					} else if (searchCategory === 'consoles' && product.id.startsWith('12')) {
-						return (
-							<Card
-								key={product.id}
-								{...product}
-							/>
-						)
-					}
-				}
-			})}
+			{data?.data.filter(filterProducts).map(product => (
+				<CardContainer
+					key={product.id}
+					{...product}
+				/>
+			))}
 		</div>
 	)
 }
