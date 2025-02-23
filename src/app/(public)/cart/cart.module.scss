@@ -1,0 +1,54 @@
+.cart_block {
+	@apply grid grid-cols-[2fr_1fr] gap-2 grid-flow-col;
+
+	> .cart_products {
+		@apply w-4/5;
+
+		> ul {
+			@apply min-w-64;
+
+			> li:last-child {
+				@apply mb-6;
+			}
+			> li {
+				@apply flex items-center gap-4 mb-4 border p-1 hover:border-primary transition-colors cursor-default;
+
+				> div {
+					@apply flex flex-col;
+
+					> p:first-child {
+						@apply text-lg mb-2;
+					}
+				}
+			}
+		}
+
+		> div {
+			@apply h-[1px] bg-black;
+		}
+
+		> p {
+			@apply text-3xl mt-2;
+		}
+	}
+
+	> div > .form {
+		@apply flex flex-col justify-center items-center border-2 p-4;
+
+		> p {
+			@apply text-2xl pb-6;
+		}
+
+		> label {
+			@apply w-[100%] mb-4;
+
+			> input {
+				@apply w-[100%] mt-1 p-2 border outline-none focus:border-primaryActive transition-colors;
+			}
+		}
+
+		> button {
+			@apply bg-primary mt-4 text-white py-2 w-[100%] hover:bg-primaryActive transition-colors;
+		}
+	}
+}

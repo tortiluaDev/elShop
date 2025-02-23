@@ -27,6 +27,7 @@ export function Cards() {
 
 	if (isLoading) return <p>Данные загружаются</p>
 	if (isError) return <p>Ошибка загрузки данных</p>
+
 	return (
 		<div className='flex flex-wrap basis-1/5 items-center justify-between gap-8 columns-4'>
 			{data?.data.filter(filterProducts).map(product => (

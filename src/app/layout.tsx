@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { JetBrains_Mono } from 'next/font/google'
 
+import { Header } from '@/components/Header'
+
 import { Provider } from '../Providers'
 
 import './globals.scss'
@@ -23,7 +25,10 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={`${jetbrainsMono.variable} antialiased`}>
-				<Provider>{children}</Provider>
+				<Provider>
+					<Header />
+					{children}
+				</Provider>
 			</body>
 		</html>
 	)

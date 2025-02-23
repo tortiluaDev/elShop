@@ -12,6 +12,10 @@ class StorageService {
 		return axiosClassic.get<Products>(`${API_URL}${this._CART}/products`)
 	}
 
+	deleteCart() {
+		return axiosClassic.delete<[]>(`${API_URL}${this._CART}/delete`)
+	}
+
 	addProductToCart(id: string, count: number = 1) {
 		return axiosClassic.post<Products>(`${API_URL}${this._CART}/addProduct/${id}`, { count })
 	}

@@ -35,9 +35,16 @@ export function Card({
 			<p className='text-gray text-lg mb-3'>id: {product.id}</p>
 			<p className='text-2xl font-semibold mb-2'>{formattedPrice}₽</p>
 			{productsInCart ? (
-				<Button className='border-primary border text-white px-4 py-2 hover:border-primaryActive transition-colors w-[100%] flex items-center justify-between'>
-					<SquareMinus onClick={() => delFromCart(product.id)} />В корзине: {productsInCart}
-					<SquarePlus onClick={() => addToCart(product.id)} />
+				<Button className='border-primary border text-black px-4 py-2 hover:border-primaryActive transition-colors w-[100%] flex items-center justify-between'>
+					<SquareMinus
+						color='black'
+						onClick={() => delFromCart(product.id)}
+					/>
+					В корзине: {productsInCart}
+					<SquarePlus
+						color='black'
+						onClick={() => addToCart(product.id)}
+					/>
 				</Button>
 			) : (
 				<Button
